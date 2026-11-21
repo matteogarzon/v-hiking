@@ -1,0 +1,50 @@
+hiking/settings.py
+  s_5c6f914f38add2::t_ff539b52e57b09 1-61,63-87
+  h_01664ee77b6dba 62
+hiking/spiders/switzerlandmobility.py
+  h_01664ee77b6dba 1-33
+hiking/spiders/komoot.py
+  h_01664ee77b6dba 4,10,16-21,23,27,91
+  s_5c6f914f38add2::t_d85981555b6945 1-3,5-9,11-15,22,24-26,28-90,92-98
+.gitignore
+  h_01664ee77b6dba 206-208,224-226
+hiking/spiders/base.py
+  h_01664ee77b6dba 1-20
+hiking/spiders/trails.py
+  h_01664ee77b6dba 1-32
+hiking/middlewares.py
+  s_5c6f914f38add2::t_ff539b52e57b09 1-100
+hiking/items.py
+  h_01664ee77b6dba 6-8,10-11,13-27,29-35,38
+  s_5c6f914f38add2::t_ff539b52e57b09 1-5,9,12
+  s_5c6f914f38add2::t_c76796e9b50520 36-37
+  s_5c6f914f38add2::t_4b7a0b37345fb4 28
+hiking/pipelines.py
+  h_01664ee77b6dba 1,3-4,6-11
+  s_5c6f914f38add2::t_ff539b52e57b09 2,5,12
+hiking/spiders/__init__.py
+  s_5c6f914f38add2::t_6453d35feef455 1-4
+scrapy.cfg
+  s_5c6f914f38add2::t_79e5e1c2e0d169 1-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e8e1543316e04c9ad20bc695dc69bde45fb38269",
+  "prompts": {},
+  "humans": {
+    "h_01664ee77b6dba": {
+      "author": "Matteo Garzon <76822392+matteogarzon@users.noreply.github.com>"
+    }
+  },
+  "sessions": {
+    "s_5c6f914f38add2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "806cfffc-f293-44bc-848b-3c8803359fec",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Matteo Garzon <76822392+matteogarzon@users.noreply.github.com>"
+    }
+  }
+}
