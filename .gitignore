@@ -203,6 +203,9 @@ cython_debug/
 #   could uncomment the following to ignore the entire vscode folder
 # .vscode/
 # Temporary file for partial code execution
+.claude
+.vscode
+**/__pycache__
 tempCodeRunnerFile.py
 
 # Ruff stuff:
@@ -218,3 +221,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+.DS_STORE
