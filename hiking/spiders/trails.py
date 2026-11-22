@@ -28,6 +28,6 @@ class TrailsSpider(BaseTrailSpider):
         loader.add_value("end", response.xpath("//th[normalize-space(text())='Destination']//following-sibling::td/text()").get())
         loader.add_value("difficulty", response.xpath("//th[normalize-space(text())='Technical requirements']//following-sibling::td/text()").get())
         loader.add_value("fitness", response.xpath("//th[normalize-space(text())='Physical requirements']//following-sibling::td/text()").get())
-        loader.add_value("description", response.xpath("//div[@class='ArticleSection--title' and text()='Description']//following-sibling::div[@class='richtext']//text().getall()"))
+        loader.add_value("description", response.xpath("//div[@class='ArticleSection--title' and text()='Description']//following-sibling::div[@class='richtext']//text()").getall())
 
         yield loader.load_item()
