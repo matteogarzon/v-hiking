@@ -8,15 +8,18 @@ import scrapy
 import re
 
 def clean_text(value):
+    """Remove extra whitespace and newlines."""
     return " ".join(value.split())
 
 def to_int(value):
+    """Convert a string to an integer, extracting digits if necessary."""
     if isinstance(value, (int, float)):
         return int(value)
     m = re.search(r"\d+", value.replace("'", "").replace(".", ""))
     return int(m.group()) if m else None
 
 class TrailItem(scrapy.Item):
+    """Represents a trail item."""
     # define the fields for your item here like:
     # name: str | None = None
 
