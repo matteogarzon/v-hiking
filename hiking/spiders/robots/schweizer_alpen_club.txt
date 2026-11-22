@@ -1,0 +1,46 @@
+User-Agent: *
+Allow: /
+
+# folders
+Disallow: /typo3/
+
+# parameters
+Disallow: /*?id=*               # non-realurl URLs
+Disallow: /*cHash               # no cHash
+Allow: /*/sitemap.xml*cHash     # cHash for sitemaps
+Disallow: /*tx_powermail_pi1    # no powermail thanks pages
+Disallow: /*tx_form_formframework    # no forms
+
+# do not allow robots to invoke searches
+Disallow: /*?tx_solr%5Bq%5D=*
+Disallow: /*?*&tx_solr%5Bq%5D=*
+
+# Do not allow robots to visit contact pages with all their possible parent URLs
+Disallow: /de/kontakt/?
+Disallow: /fr/contact/?
+Disallow: /it/contatto/?
+Disallow: /en/contact/?
+
+# Do not allow robots to visit the favorites list ad page (without login)
+Disallow: /de/merklisten/?
+Disallow: /fr/merklisten/?
+Disallow: /it/merklisten/?
+Disallow: /en/merklisten/?
+
+# Do not allow to index the OIDC login endpoints
+Disallow: /de/login/
+Disallow: /fr/login/
+Disallow: /it/login/
+Disallow: /en/login/
+
+# Do not allow crawlers to crawl poi/route feedback forms
+Disallow: /de/huetten-und-touren/sac-tourenportal/feedback/
+Disallow: /fr/cabanes-et-courses/portail-des-courses-du-cas/feedback/
+Disallow: /it/capanne-e-escursioni/portale-escursionistico-del-cas/feedback/
+Disallow: /en/huts-and-tours/sac-route-portal/feedback/
+
+# sitemap
+Sitemap: https://www.sac-cas.ch/de/sitemap.xml
+Sitemap: https://www.sac-cas.ch/fr/sitemap.xml
+Sitemap: https://www.sac-cas.ch/it/sitemap.xml
+Sitemap: https://www.sac-cas.ch/en/sitemap.xml
