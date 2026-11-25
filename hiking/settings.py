@@ -85,3 +85,10 @@ ITEM_PIPELINES = {
 
 # Set settings whose default value is deprecated to a future-proof value
 FEED_EXPORT_ENCODING = "utf-8"
+
+
+# Every spider saves its items to data/<spider name>.jsonl (input for the Solr indexing step).
+# "overwrite": True replaces the file on each run instead of appending duplicates.
+FEEDS = {
+    "data/%(name)s.jsonl": {"format": "jsonlines", "overwrite": True},
+}
