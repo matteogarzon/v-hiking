@@ -1,0 +1,33 @@
+webapp/app.py
+  h_01664ee77b6dba 1-40,43-55,61,73-98,100-104
+  s_b0ec6ff32f96d6::t_e4ebfcca3ef537 41-42
+  s_b0ec6ff32f96d6::t_b74ba3f2fd8fdd 60,62-72
+  s_b0ec6ff32f96d6::t_d847e57b1a3acc 99
+  s_b0ec6ff32f96d6::t_0ef383aef26960 56-59
+webapp/templates/results.html
+  h_01664ee77b6dba 1-37,45-114
+  s_b0ec6ff32f96d6::t_d361a8558a504b 38-44
+requirements.txt
+  h_01664ee77b6dba 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e5e0a82c57a6a7171e9c11b1aba69dd1d356d3a0",
+  "prompts": {},
+  "humans": {
+    "h_01664ee77b6dba": {
+      "author": "Matteo Garzon <76822392+matteogarzon@users.noreply.github.com>"
+    }
+  },
+  "sessions": {
+    "s_b0ec6ff32f96d6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6db57798-11c0-4a4c-bc13-4493d60a606b",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Matteo Garzon <76822392+matteogarzon@users.noreply.github.com>"
+    }
+  }
+}
