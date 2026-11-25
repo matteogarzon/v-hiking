@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>v-hiking – Trails</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; color: #222; }
+    form { display: flex; gap: .5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+    th, td { padding: .5rem .6rem; border-bottom: 1px solid #ddd; text-align: left; vertical-align: top; }
+    th { background: #f4f4f4; position: sticky; top: 0; }
+    th a { color: inherit; text-decoration: none; }
+    tr:hover td { background: #fafafa; }
+    .num { text-align: right; white-space: nowrap; }
+    .muted { color: #888; font-size: .8rem; }
+    .badge { padding: .1rem .5rem; border-radius: 1rem; font-size: .8rem; }
+    .easy { background: #d8f5d8; } .medium { background: #fff1c2; } .hard { background: #ffd6d6; }
+    .pager { margin-top: 1rem; display: flex; gap: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Hiking trails</h1>
+
+  <form method="get">
+    <input name="q" value="{{ q }}" placeholder="Search name, places, description…">
+    <select name="source">
+      <option value="">All sources</option>
+      {% for s in sources %}
+        <option value="{{ s }}" {% if s == source %}selected{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+    <select name="difficulty">
+      <option value="">Any difficulty</option>
+      {% for d in ["easy", "medium", "hard"] %}
+        <option value="{{ d }}" {% if d == difficulty %}selected{% endif %}>{{ d }}</option>
+      {% endfor %}
+    </select>
+    <label>Length (km)
+      <input type="number" name="min_len" min="0" step="0.1" placeholder="min" style="width:5rem"
+             value="{{ '%g' % min_len if min_len is not none }}">
+      –
+      <input type="number" name="max_len" min="0" step="0.1" placeholder="max" style="width:5rem"
+             value="{{ '%g' % max_len if max_len is not none }}">
+    </label>
+    <button>Search</button>
+    <a href="{{ url_for('index') }}">Reset</a>
+  </form>
+
+  <p class="muted">{{ total }} trails found</p>
+
+  {# header that toggles sorting when clicked #}
+  {% macro sort_th(field, label, cls="") %}
+    {% set new_order = "desc" if sort == field and order == "asc" else "asc" %}
+    <th class="{{ cls }}">
+      <a href="{{ url_for('index', q=q, source=source, difficulty=difficulty, min_len=min_len, max_len=max_len, sort=field, order=new_order) }}">
+        {{ label }}{% if sort == field %} {{ "▲" if order == "asc" else "▼" }}{% endif %}
+      </a>
+    </th>
+  {% endmacro %}
+
+  <table>
+    <thead>
+      <tr>
+        {{ sort_th("name", "Trail") }}
+        <th>Route</th>
+        {{ sort_th("difficulty", "Difficulty") }}
+        {{ sort_th("length_km", "Length", "num") }}
+        {{ sort_th("elevation_gain_m", "Ascent", "num") }}
+        <th class="num">Duration</th>
+        {{ sort_th("rating", "Rating", "num") }}
+        {{ sort_th("source", "Source") }}
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in trails %}
+      <tr>
+        <td><a href="{{ t.url }}" target="_blank" rel="noopener">{{ t.name or "(unnamed)" }}</a></td>
+        <td>
+          {{ t.start or "?" }} → {{ t.end or "?" }}
+          {% if t.via %}<div class="muted">via {{ t.via | replace(" | ", ", ") }}</div>{% endif %}
+          {% if t.stages %}<div class="muted">{{ t.stages }} stages</div>{% endif %}
+        </td>
+        <td>
+          {% if t.difficulty %}<span class="badge {{ t.difficulty }}">{{ t.difficulty }}</span>{% endif %}
+          {% if t.fitness %}<div class="muted">fitness: {{ t.fitness }}</div>{% endif %}
+        </td>
+        <td class="num">{{ t.length_km ~ " km" if t.length_km else "–" }}</td>
+        <td class="num">{{ t.elevation_gain_m ~ " m" if t.elevation_gain_m else "–" }}</td>
+        <td class="num">{{ t.duration or "–" }}</td>
+        <td class="num">{{ "★ " ~ t.rating if t.rating else "–" }}</td>
+        <td>{{ t.source }}</td>
+        <td>{{ (t.description or "") | truncate(140) }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="9">No trails match. Did you run the spiders?</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {# ---------- pagination ---------- #}
+  {% if pages > 1 %}
+  <div class="pager">
+    {% if page > 1 %}
+      <a href="{{ url_for('index', q=q, source=source, difficulty=difficulty, min_len=min_len, max_len=max_len, sort=sort, order=order, page=page-1) }}">← Prev</a>
+    {% endif %}
+    <span>Page {{ page }} / {{ pages }}</span>
+    {% if page < pages %}
+      <a href="{{ url_for('index', q=q, source=source, difficulty=difficulty, min_len=min_len, max_len=max_len, sort=sort, order=order, page=page+1) }}">Next →</a>
+    {% endif %}
+  </div>
+  {% endif %}
+</body>
+</html>
